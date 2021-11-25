@@ -100,117 +100,31 @@
 </head>
 <body>
 
-  <!-- Google Tag Manager (noscript)-->
-  <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGQ9WQT" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-  </noscript>
+ <!-- window.location 是寫表單送出成功後要進到哪一個頁面 -->
+<iframe name="iframe_redirect" id="iframe_redirect" style="display:none;" onload="if(typeof sent_redirect!='undefined'){window.location='https://www.google.com.tw/';}"></iframe>
 
-  <div class="container">
-    <main class="row">
-      <!-- bg -->
-      <section class="six columns half bg"></section>
-      
-      <!-- form -->
-      <section class="six columns half form">
-        <h1>Contact us</h1>
-        <form>
-          <!-- 姓名 -->
-          <div class="input-group">
-            <label for="demo_name">姓名</label>
-            <input class="u-full-width" type="text" placeholder="test@mailbox.com" id="demo_name">
-          </div>
-
-          <!-- 性別 -->
-          <div class="input-group">
-            <label>姓別</label>
-            <div class="radio-group row">
-              <!-- 男性 -->
-              <div class="four columns">
-                <input type="radio" id="male" name="demo_radio" value="male" checked>
-                <label for="male">男性</label>
-              </div>
-
-              <!-- 女性 -->
-              <div class="four columns">
-                <input type="radio" id="female" name="demo_radio" value="female">
-                <label for="female">女性</label>
-              </div>
-
-              <!-- 法人 -->
-              <div class="four columns">
-                <input type="radio" id="legal" name="demo_radio" value="legal">
-                <label for="legal">法人</label>
-              </div>
-            </div>
-          </div>
-
-          <!-- 詢問類別 -->
-          <div class="input-group">
-            <label for="demo_select">詢問類別</label>
-            <select class="u-full-width" id="demo_select">
-              <option value="0" value="0" selected disabled>請選擇</option>
-              <option value="cat">貓類</option>
-              <option value="dog">狗類</option>
-              <option value="bear">熊類</option>
-            </select>
-          </div>
-
-          <!-- 詢問內容 -->
-          <div class="input-group">
-            <label for="demo_textarea">詢問內容</label>
-            <textarea class="u-full-width" id="demo_textarea"></textarea>
-          </div>
-
-          <button type="button" id="submit" class="button-primary u-full-width">確認送出</button>
-
-        </form>
-      </section>
-    </main>
+<!-- action裡的網址，從google form的檢視表單，再用開發人員工具，搜尋「formResponse」可以看到 -->
+<form onsubmit="sent_redirect=true" target="iframe_redirect" class="" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfpYnuT9-DrtNCvMP1r29N79PFKJUU-NJJCtbMYAQ3a1y9avg/formResponse" method="post">
+  <div>
+    <!-- name值，從google form的檢視表單，再用開發人員工具，搜尋「entry.」可以看到 -->
+    <input type="text" name="entry.1290621136" value="">
   </div>
+  <div>
+    <input type="text" name="entry.693001954" value="">
+  </div>
+  <div>
+    <select class="" name="entry.701376988">
+      <!-- option的value，從google form的檢視表單，再用開發人員工具，搜尋「data-value」可以看到 -->
+      <option value="A1">a1</option>
+      <option value="A2">a2</option>
+      <option value="A3">a3</option>
+      <option value="A4">a4</option>
+      <option value="A5">a5</option>
+    </select>
+  </div>
+  <button type="submit" name="button" value="submit">submit</button>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script>
-    $(function() {
-      $('#submit').on('click', function() {
-        
-        // 姓名
-        var name = $('#demo_name').val() || '未填寫';
-
-        // 性別
-        var sex = function() {
-          var v;
-          $('[name="demo_radio"]').each(function() {
-            if($(this).prop('checked') === true) v = $(this).val();
-          });
-          return v;
-        };
-
-        // 類別
-        var cat = $('#demo_select').val() || '未填寫';
-
-        // 內容
-        var msg = $('#demo_textarea').val() || '未填寫';
-
-        // post
-        var data = {
-          'entry.693001954': name,
-          'entry.701376988': sex(),
-          'entry.1290621136': cat
-        };
-        $.ajax({
-          type: 'POST',
-          url: 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfpYnuT9-DrtNCvMP1r29N79PFKJUU-NJJCtbMYAQ3a1y9avg/formResponse',
-          data: data,
-          contentType: 'application/json',
-          dataType: 'jsonp',
-          complete: function() {
-            alert('資料已送出！');
-          }
-        });
-        
-      });
-    });
-  </script>
+</form>
   
 </body>
 </html>
